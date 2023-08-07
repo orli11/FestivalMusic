@@ -1,0 +1,26 @@
+{
+  "name": "festivalmusica_inicio",
+  "version": "1.0.0",
+  "description": "Proyecto con Gul, SASS, HTML",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orli11/FestivalMusic.git"
+  },
+  "keywords": [
+    "SASS",
+    "Gulp"
+  ],
+  "author": "Orlando Javier Flores",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/orli11/FestivalMusic/issues"
+  },
+  "homepage": "https://github.com/orli11/FestivalMusic#readme",
+  "devDependencies": {
+    "sass": "^1.64.2"
+  }
+}
