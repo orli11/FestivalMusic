@@ -35,7 +35,7 @@ function versionAvif ( done ) {
     }
     src('src/img/**/*.{png,jpg}') //Para buscar dos formatos
     .pipe( avif(opciones) )
-    .pipe( dest('build/img'))
+    .pipe( dest('build/img'));
 
     done();
 }
@@ -45,18 +45,25 @@ function versionWebp ( done ) {
     }
     src('src/img/**/*.{png,jpg}') //Para buscar dos formatos
     .pipe( webp(opciones) )
-    .pipe( dest('build/img'))
+    .pipe( dest('build/img'));
 
     done();
+}
+
+function javascript( done ) {
+    src('src/js/**/*.js')
+    .pipe(dest('build/js'));
 }
 
 function dev ( done ) {
-    watch('src/scss/**/*.scss', css)
+    watch('src/scss/**/*.scss', css);
+    watch('src/js/**/*.js', javascript)
     done();
 }
 
-exports.css = css;
+exports.css = css
+exports.js = javascript;
 exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
 exports.versionAvif = versionAvif;
-exports.dev = parallel(imagenes, versionWebp, versionAvif, dev);
+exports.dev = parallel(imagenes, versionWebp, versionAvif,javascript, dev);
