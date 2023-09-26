@@ -4,7 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const iniciarApp = () => {
     crearGaleria();
+    scrollNav();
 }
+const scrollNav = () => {
+    const enlaces = document.querySelectorAll('.navegacion-principal');
+    enlaces.forEach(enl => {
+        enl.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            const seccionScroll = e.target.attributes.href.value;
+            const seccion = document.querySelector(seccionScroll);
+            seccion.scrollIntoView({behavior: "smooth"});
+        });
+    });
+}
+
 const crearGaleria = () => {
     const galeria = document.querySelector('.galeria-imagenes');
 
