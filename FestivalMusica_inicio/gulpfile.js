@@ -1,8 +1,15 @@
 const { src, dest, watch, parallel } = require("gulp");
 
+//JS
+const terser = require('gulp-terser-js'); //mejora el js
+
 //Dependencias de CSS
 const sass = require("gulp-sass")(require('sass'));
 const plumber = require('gulp-plumber');
+const autoprefixer = require('autoprefixer'); //Funcione en el navegador que elijas
+const cssnano = require('cssnano'); //Comprime el codigo de CSS
+const postcss = require('gulp-postcss'); //Hace algunas transformaciones por medio de los dos anteriores
+const sourcemaps = require('gulp-sourcemaps');
 
 //Dependencias de imagenes
 const imagemin = require('gulp-imagemin');
@@ -13,8 +20,11 @@ const cache = require('gulp-cache');
 function css( done ) {
 
     src('src/scss/**/*.scss') //Identificr el archivo 
+        .pipe( sourcemaps.init())
         .pipe( plumber() )    //No corta la ejecucion del programa cuando hay algun error    
         .pipe( sass() )                //Compilarlo
+        .pipe( postcss([ autoprefixer(), cssnano() ]) )
+        .pipe(sourcemaps.write('.')) //Ubica el css que está comprimido
         .pipe(dest('build/css'))       //Almacenarla en el disco duro
 
     done();//Callback que avisa a gulp cuando llegamos al final
@@ -52,6 +62,9 @@ function versionWebp ( done ) {
 
 function javascript( done ) {
     src('src/js/**/*.js')
+    .pipe(sourcemaps.init() )
+    .pipe( terser()) //mejora el js
+    .pipe(sourcemaps.write('.'))
     .pipe(dest('build/js'));
 }
 
